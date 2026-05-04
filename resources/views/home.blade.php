@@ -140,6 +140,18 @@
                     <p class="text-base text-[#4d4a47]">Place your order with a single click.</p>
                 </div>
             </section>
+
+            <footer class="mt-16 border-t border-[#e5d5c2] pt-8 text-sm text-[#4d4a47]">
+                <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p>© 2026 CartMasala. All rights reserved.</p>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="#products" class="hover:text-[#f53003]">Spices</a>
+                        <a href="#how-it-works" class="hover:text-[#f53003]">Order Process</a>
+                        <a href="#features" class="hover:text-[#f53003]">Benefits</a>
+                        <a href="mailto:hello@cartmasala.com" class="hover:text-[#f53003]">hello@cartmasala.com</a>
+                    </div>
+                </div>
+            </footer>
         </div>
     </body>
 </html>

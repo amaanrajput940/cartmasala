@@ -40,5 +40,16 @@
                 <a href="{{ url('/') }}" class="inline-flex items-center justify-center mt-4 w-full rounded-full border border-[#e5d5c2] bg-white px-6 py-4 text-sm font-semibold text-[#1b1b18] transition duration-200 hover:bg-[#f5f5f2]">Back to shop</a>
             </div>
         </div>
+
+        <footer class="mt-10 border-t border-[#e5d5c2] pt-8 text-sm text-[#4d4a47]">
+            <div class="max-w-xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p>© @php date('Y') @endphp CartMasala. All rights reserved.</p>
+                <div class="flex flex-wrap items-center gap-4">
+                    <a href="{{ url('/') }}#products" class="hover:text-[#f53003]">Shop</a>
+                    <a href="{{ url('/') }}#how-it-works" class="hover:text-[#f53003]">Order Process</a>
+                    <a href="mailto:hello@cartmasala.com" class="hover:text-[#f53003]">hello@cartmasala.com</a>
+                </div>
+            </div>
+        </footer>
     </body>
 </html>
