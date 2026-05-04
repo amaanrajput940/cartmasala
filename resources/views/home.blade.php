@@ -16,11 +16,11 @@
             <header class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10">
                 <div>
                     <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53]">CartMasala</p>
-                    <h1 class="text-2xl sm:text-3xl font-bold text-[#1b1b18]">Aapka masalon ka online bazaar</h1>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-[#1b1b18]">Your online spice marketplace</h1>
                 </div>
                 <nav class="flex flex-wrap items-center gap-4 text-sm text-[#4d4a47]">
                     <a href="#products" class="hover:text-[#f53003]">Spices</a>
-                    <a href="#how-it-works" class="hover:text-[#f53003]">Order Steps</a>
+                    <a href="#how-it-works" class="hover:text-[#f53003]">Order Process</a>
                     <a href="#features" class="hover:text-[#f53003]">Benefits</a>
                 </nav>
                 <a href="tel:+919000000000" class="rounded-full bg-[#1b1b18] px-5 py-3 text-sm font-semibold text-white transition duration-200 hover:bg-[#f53003]">Call Now</a>
@@ -31,16 +31,16 @@
                 <div class="relative grid gap-6 sm:grid-cols-2 items-center">
                     <div class="max-w-2xl">
                         <span class="inline-flex items-center rounded-full bg-[#fff2f2] px-4 py-2 text-sm font-semibold text-[#f53003]">Limited offer: 10% off bundle orders</span>
-                        <h2 class="mt-6 text-3xl sm:text-5xl font-bold leading-tight text-[#1b1b18]">Taaza masale, seedhi delivery aur khushal kitchen.</h2>
-                        <p class="mt-5 text-base sm:text-lg text-[#4d4a47]">Ghar par add karein apne favourite masale—haldi, mirch, dhaniya, garam masala aur aur bhi bahut kuch.</p>
+                        <h2 class="mt-6 text-3xl sm:text-5xl font-bold leading-tight text-[#1b1b18]">Fresh spices delivered fast for a happier kitchen.</h2>
+                        <p class="mt-5 text-base sm:text-lg text-[#4d4a47]">Shop turmeric, chili, coriander, garam masala and more from home.</p>
                         <div class="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                            <a href="#products" class="inline-flex items-center justify-center rounded-xl bg-[#1b1b18] px-8 py-4 text-sm font-semibold text-white transition duration-200 hover:bg-[#f53003]">Abhi order karein</a>
+                            <a href="#products" class="inline-flex items-center justify-center rounded-xl bg-[#1b1b18] px-8 py-4 text-sm font-semibold text-white transition duration-200 hover:bg-[#f53003]">Order Now</a>
                             <div class="rounded-full border border-[#e5d5c2] bg-white px-4 py-3 text-sm text-[#4d4a47]">Cash on delivery available</div>
                         </div>
                         <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="rounded-2xl bg-white p-4 border border-[#f0dbcf] shadow-lg">
                                 <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53]">Fresh pack</p>
-                                <p class="mt-2 text-sm text-[#4d4a47]">Har order ko carefully seal aur pack karte hain.</p>
+                                <p class="mt-2 text-sm text-[#4d4a47]">Every order is carefully sealed and packed.</p>
                             </div>
                             <div class="rounded-2xl bg-white p-4 border border-[#f0dbcf] shadow-lg">
                                 <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53]">Premium quality</p>
@@ -57,7 +57,7 @@
                         <div class="p-6">
                             <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53]">Best seller bundle</p>
                             <h3 class="mt-4 text-2xl font-semibold text-[#1b1b18]">Spice collection pack</h3>
-                            <p class="mt-3 text-sm text-[#4d4a47]">Perfect starter set for biryani, curry, snacks aur chai.</p>
+                            <p class="mt-3 text-sm text-[#4d4a47]">Perfect starter set for biryani, curry, snacks and tea.</p>
                             <div class="mt-6 inline-flex items-center gap-3 rounded-full bg-[#fff2f2] px-4 py-3 text-sm font-semibold text-[#f53003]">Limited stock</div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                             <div class="p-6">
                                 <h3 class="text-xl font-semibold mb-2">{{ $spice['name'] }}</h3>
                                 <p class="text-sm text-[#4d4a47] leading-relaxed mb-4">{{ $spice['description'] }}</p>
-                                <form method="POST" action="{{ route('order.submit') }}">
+                                <form method="POST" action="{{ route('order.review') }}">
                                     @csrf
                                     <input type="hidden" name="product" value="{{ $spice['name'] }}">
                                     <input type="hidden" name="price" value="{{ $spice['price'] }}">
@@ -97,7 +97,7 @@
                                             @endfor
                                         </select>
                                     </div>
-                                    <button type="submit" class="w-full bg-[#1b1b18] text-white rounded-xl py-3 transition duration-200 hover:bg-[#f53003]">Order Now</button>
+                                    <button type="submit" class="w-full bg-[#1b1b18] text-white rounded-xl py-3 transition duration-200 hover:bg-[#f53003]">Review Order</button>
                                 </form>
                             </div>
                         </article>
@@ -108,20 +108,20 @@
             <section id="how-it-works" class="mb-10">
                 <div class="mb-6">
                     <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53]">Easy order process</p>
-                    <h2 class="text-2xl sm:text-3xl font-semibold">Order Now par kya hoga</h2>
+                    <h2 class="text-2xl sm:text-3xl font-semibold">What happens after Order Now</h2>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <div class="rounded-2xl bg-white p-6 border border-[#f0dbcf] shadow-lg">
-                        <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53] mb-3">1. Product select karein</p>
-                        <p class="text-sm text-[#4d4a47]">Card mein apni pasand masala choose karein aur quantity set karein.</p>
+                        <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53] mb-3">1. Select product</p>
+                        <p class="text-sm text-[#4d4a47]">Choose your preferred spice and quantity from the card.</p>
                     </div>
                     <div class="rounded-2xl bg-white p-6 border border-[#f0dbcf] shadow-lg">
-                        <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53] mb-3">2. Order submit karein</p>
-                        <p class="text-sm text-[#4d4a47]">Order Now button se aapka order confirm ho jayega aur confirmation page khulega.</p>
+                        <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53] mb-3">2. Review order</p>
+                        <p class="text-sm text-[#4d4a47]">Click Review Order to see the full order summary before final confirmation.</p>
                     </div>
                     <div class="rounded-2xl bg-white p-6 border border-[#f0dbcf] shadow-lg">
-                        <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53] mb-3">3. Delivery schedule</p>
-                        <p class="text-sm text-[#4d4a47]">Aapko delivery 1-2 din ke andar mil jayegi. Order details page par order summary show hogi.</p>
+                        <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53] mb-3">3. Confirm and ship</p>
+                        <p class="text-sm text-[#4d4a47]">Confirm the review screen and your order will be ready for delivery.</p>
                     </div>
                 </div>
             </section>
@@ -129,15 +129,15 @@
             <section id="features" class="bg-[#f5f5f2] rounded-2xl p-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <div>
                     <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53] mb-3">Fast delivery</p>
-                    <p class="text-base text-[#4d4a47]">Hum aapke masalon ko fresh pack kar ke jaldi bhejte hain.</p>
+                    <p class="text-base text-[#4d4a47]">We pack your spices fresh and ship them quickly.</p>
                 </div>
                 <div>
                     <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53] mb-3">Trusted quality</p>
-                    <p class="text-base text-[#4d4a47]">Har spice ko quality check kar ke ship karte hain.</p>
+                    <p class="text-base text-[#4d4a47]">Every spice is quality checked before shipping.</p>
                 </div>
                 <div>
                     <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53] mb-3">Easy order</p>
-                    <p class="text-base text-[#4d4a47]">Sirf ek click mein order place karein.</p>
+                    <p class="text-base text-[#4d4a47]">Place your order with a single click.</p>
                 </div>
             </section>
         </div>

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Order Confirmation</title>
+        <title>Order Review</title>
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @else
@@ -13,21 +13,31 @@
     </head>
     <body>
         <div class="min-h-screen flex items-center justify-center px-6 py-8">
-            <div class="max-w-xl mx-auto bg-white rounded-3xl shadow-xl p-8 text-center">
-                <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53]">Order placed</p>
-                <h1 class="text-2xl font-semibold mt-4">Shukriya!</h1>
-                <p class="text-[#4d4a47] mt-4">Your order request has been received. See the order summary below:</p>
-                <div class="mt-6 rounded-3xl border border-[#e5d5c2] bg-[#f7f0e6] p-6 text-left">
-                    <p class="text-sm text-[#7d6f53]">Order ID: <span class="font-semibold text-[#1b1b18]">{{ $orderId }}</span></p>
-                    <p class="text-xl font-semibold text-[#1b1b18] mt-4">{{ $product }}</p>
-                    <p class="text-sm text-[#7d6f53] mt-2">Quantity: {{ $quantity }}</p>
-                    <p class="text-sm text-[#7d6f53] mt-2">Price per unit: ₹{{ $price }}</p>
+            <div class="max-w-xl mx-auto bg-white rounded-3xl shadow-xl p-8">
+                <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53]">Order Review</p>
+                <h1 class="text-2xl font-semibold mt-4">Review your order</h1>
+                <p class="text-[#4d4a47] mt-4">Below is your selected spice and quantity. Please review and confirm.</p>
+
+                <div class="mt-6 rounded-3xl border border-[#e5d5c2] bg-[#f7f0e6] p-6">
+                    <p class="text-sm text-[#7d6f53]">Product:</p>
+                    <p class="text-xl font-semibold text-[#1b1b18] mt-2">{{ $product }}</p>
+                    <p class="text-sm text-[#7d6f53] mt-4">Unit price: <span class="font-semibold text-[#1b1b18]">₹{{ $price }}</span></p>
+                    <p class="text-sm text-[#7d6f53] mt-2">Quantity: <span class="font-semibold text-[#1b1b18]">{{ $quantity }}</span></p>
+                    <p class="text-sm text-[#7d6f53] mt-2">Unit: <span class="font-semibold text-[#1b1b18]">{{ $unit }}</span></p>
                     <p class="text-lg font-semibold text-[#1b1b18] mt-4">Total: ₹{{ $total }}</p>
                 </div>
-                <div class="inline-flex items-center gap-2 mt-6 rounded-full bg-[#f7f0e6] px-4 py-2 text-[#4d4a47] border border-[#e5d5c2]">
-                    <span>Delivery in 1-2 days</span>
-                </div>
-                <a href="{{ url('/') }}" class="inline-flex items-center justify-center mt-8 w-full rounded-full bg-[#1b1b18] text-white py-3 transition duration-200 hover:bg-[#f53003]">Back to Home</a>
+
+                <form method="POST" action="{{ route('order.submit') }}" class="mt-8 space-y-4">
+                    @csrf
+                    <input type="hidden" name="product" value="{{ $product }}">
+                    <input type="hidden" name="price" value="{{ $price }}">
+                    <input type="hidden" name="unit" value="{{ $unit }}">
+                    <input type="hidden" name="quantity" value="{{ $quantity }}">
+
+                    <button type="submit" class="w-full rounded-full bg-[#1b1b18] px-6 py-4 text-sm font-semibold text-white transition duration-200 hover:bg-[#f53003]">Confirm Order</button>
+                </form>
+
+                <a href="{{ url('/') }}" class="inline-flex items-center justify-center mt-4 w-full rounded-full border border-[#e5d5c2] bg-white px-6 py-4 text-sm font-semibold text-[#1b1b18] transition duration-200 hover:bg-[#f5f5f2]">Back to shop</a>
             </div>
         </div>
     </body>
