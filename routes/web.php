@@ -40,7 +40,10 @@ Route::get('/', function () {
 
 Route::post('/order', function (Request $request) {
     $product = $request->input('product');
-    $quantity = $request->input('quantity', 1);
+    $price = (int) $request->input('price', 0);
+    $quantity = max(1, (int) $request->input('quantity', 1));
+    $total = $price * $quantity;
+    $orderId = 'CM-' . strtoupper(substr(md5(uniqid('', true)), 0, 8));
 
-    return view('order-confirmation', compact('product', 'quantity'));
+    return view('order-confirmation', compact('product', 'price', 'quantity', 'total', 'orderId'));
 })->name('order.submit');

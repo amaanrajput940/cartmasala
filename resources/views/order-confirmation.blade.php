@@ -16,9 +16,14 @@
             <div class="max-w-xl mx-auto bg-white rounded-3xl shadow-xl p-8 text-center">
                 <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53]">Order placed</p>
                 <h1 class="text-2xl font-semibold mt-4">Shukriya!</h1>
-                <p class="text-[#4d4a47] mt-4">Aapka order place ho gaya hai:</p>
-                <p class="text-xl font-semibold text-[#1b1b18] mt-4">{{ $product }}</p>
-                <p class="text-sm text-[#7d6f53] mt-2">Quantity: {{ $quantity }}</p>
+                <p class="text-[#4d4a47] mt-4">Aapka order request receive ho gaya hai. Neeche order summary dekhein:</p>
+                <div class="mt-6 rounded-3xl border border-[#e5d5c2] bg-[#f7f0e6] p-6 text-left">
+                    <p class="text-sm text-[#7d6f53]">Order ID: <span class="font-semibold text-[#1b1b18]">{{ $orderId }}</span></p>
+                    <p class="text-xl font-semibold text-[#1b1b18] mt-4">{{ $product }}</p>
+                    <p class="text-sm text-[#7d6f53] mt-2">Quantity: {{ $quantity }}</p>
+                    <p class="text-sm text-[#7d6f53] mt-2">Price per unit: ₹{{ $price }}</p>
+                    <p class="text-lg font-semibold text-[#1b1b18] mt-4">Total: ₹{{ $total }}</p>
+                </div>
                 <div class="inline-flex items-center gap-2 mt-6 rounded-full bg-[#f7f0e6] px-4 py-2 text-[#4d4a47] border border-[#e5d5c2]">
                     <span>Delivery in 1-2 days</span>
                 </div>
