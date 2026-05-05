@@ -102,8 +102,8 @@
                 </div>
             </section>
 
-            <section id="features" class="bg-[#f5f5f2] rounded-2xl p-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div>
+            <section id="features" class="bg-white rounded-2xl p-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="">
                     <p class="text-sm uppercase tracking-[0.12em] text-[#7d6f53] mb-3">Fast delivery</p>
                     <p class="text-base text-[#4d4a47]">We pack your spices fresh and ship them quickly.</p>
                 </div>
