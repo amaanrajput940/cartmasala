@@ -33,6 +33,7 @@ class CartController extends Controller
                 $cart = Cart::getOrCreateCart($identifier['user_id'], $identifier['session_id']);
                 $cartData = $cart->getCartData();
 
+
                 $product = $request->product;
                 $quantity = $request->quantity;
 
@@ -53,9 +54,18 @@ class CartController extends Controller
                 $cart->save();
             });
 
-            return redirect()->back()->with('success', 'Item added to cart!');
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json(['message' => 'Item added to cart successfully!'], 200);
+            }
+
+            return response()->json(['message' => 'Item added to cart successfully!'], 200);
+
+            // return redirect()->back()->with('success', 'Item added to cart!');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to add item to cart. Please try again.');
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json(['message' => 'Failed to add item to cart. Please try again.dd'], 400);
+            }
+            return redirect()->back()->with('error', 'Failed to add item to cart. Please try again.xxx');
         }
     }
 
@@ -74,7 +84,7 @@ class CartController extends Controller
 
             return view('cart', compact('cartData', 'total'));
         } catch (\Exception $e) {
-            \Log::error('Cart display failed', ['error' => $e->getMessage(), 'user_id' => $identifier['user_id']]);
+            // \Log::error('Cart display failed', ['error' => $e->getMessage(), 'user_id' => $identifier['user_id']]);
             return view('cart', ['cartData' => [], 'total' => 0])->with('error', 'Unable to load cart. Please try again.');
         }
     }
@@ -112,7 +122,7 @@ class CartController extends Controller
 
             return redirect()->back()->with('success', 'Cart updated!');
         } catch (\Exception $e) {
-            \Log::error('Cart update failed', ['error' => $e->getMessage(), 'user_id' => $identifier['user_id']]);
+            // \Log::error('Cart update failed', ['error' => $e->getMessage(), 'user_id' => $identifier['user_id']]);
             return redirect()->back()->with('error', 'Failed to update cart. Please try again.');
         }
     }
@@ -135,7 +145,7 @@ class CartController extends Controller
 
             return redirect()->back()->with('success', 'Item removed from cart!');
         } catch (\Exception $e) {
-            \Log::error('Cart remove failed', ['error' => $e->getMessage(), 'user_id' => $identifier['user_id']]);
+            // \Log::error('Cart remove failed', ['error' => $e->getMessage(), 'user_id' => $identifier['user_id']]);
             return redirect()->back()->with('error', 'Failed to remove item. Please try again.');
         }
     }
@@ -156,7 +166,7 @@ class CartController extends Controller
 
             return redirect()->back()->with('success', 'Cart cleared!');
         } catch (\Exception $e) {
-            \Log::error('Cart clear failed', ['error' => $e->getMessage(), 'user_id' => $identifier['user_id']]);
+            // \Log::error('Cart clear failed', ['error' => $e->getMessage(), 'user_id' => $identifier['user_id']]);
             return redirect()->back()->with('error', 'Failed to clear cart. Please try again.');
         }
     }

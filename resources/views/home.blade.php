@@ -56,25 +56,19 @@
                             <div class="p-6">
                                 <h3 class="text-xl font-semibold mb-2">{{ $spice['name'] }}</h3>
                                 <p class="text-sm text-[#4d4a47] leading-relaxed mb-4">{{ $spice['description'] }}</p>
-                                <form method="POST" action="{{ route('cart.add') }}">
-                                    @csrf
-                                    <input type="hidden" name="product" value="{{ $spice['name'] }}">
-                                    <input type="hidden" name="price" value="{{ $spice['price'] }}">
-                                    <input type="hidden" name="unit" value="{{ $spice['unit'] }}">
-                                    <div class="mb-4">
-                                        <div class="flex items-center justify-between mb-3">
-                                            <span class="font-semibold text-[#1b1b18]">₹{{ $spice['price'] }} / {{ $spice['unit'] }}</span>
-                                            <span class="text-sm text-[#7d6f53]">High quality</span>
-                                        </div>
-                                        <label class="block text-sm text-[#7d6f53] mb-2">Quantity</label>
-                                        <select name="quantity" class="w-full rounded-xl border border-[#e5d5c2] px-3 py-2 text-sm text-[#1b1b18]">
-                                            @for ($i = 1; $i <= 5; $i++)
-                                                <option value="{{ $i }}">{{ $i }} pack</option>
-                                            @endfor
-                                        </select>
+                                <div class="mb-4">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="font-semibold text-[#1b1b18]">₹{{ $spice['price'] }} / {{ $spice['unit'] }}</span>
+                                        <span class="text-sm text-[#7d6f53]">High quality</span>
                                     </div>
-                                    <button type="submit" class="w-full bg-[#1b1b18] text-white rounded-xl py-3 transition duration-200 hover:bg-[#f53003]">Add to Cart</button>
-                                </form>
+                                    <label class="block text-sm text-[#7d6f53] mb-2">Quantity</label>
+                                    <select id="quantity-{{ $loop->index }}" class="w-full rounded-xl border border-[#e5d5c2] px-3 py-2 text-sm text-[#1b1b18]">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <option value="{{ $i }}">{{ $i }} pack</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <button onclick="addToCart('{{ $spice['name'] }}', '{{ $spice['price'] }}', '{{ $spice['unit'] }}', {{ $loop->index }})" class="w-full bg-[#1b1b18] text-white rounded-xl py-3 transition duration-200 hover:bg-[#f53003]">Add to Cart</button>
                             </div>
                         </article>
                     @endforeach
@@ -116,5 +110,63 @@
                     <p class="text-base text-[#4d4a47]">Place your order with a single click.</p>
                 </div>
             </section>
+
+            <div id="toast" class="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg transform translate-y-full transition-transform duration-300" style="display: none;">
+                <span id="toast-message"></span>
+            </div>
+
+            @push("scripts")
+                <script>
+                function addToCart(product, price, unit, index) {
+                    const quantity = document.getElementById('quantity-' + index).value;
+                    const data = {
+                        product: product,
+                        price: price,
+                        unit: unit,
+                        quantity: quantity
+                    };
+                    fetch('{{ route("cart.add") }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        showToast(data.message, 'success');
+                    })
+                    .catch(error => {
+                        console.log(error);
+
+                        showToast('Failed to add item to cart. Please try again.', 'error');
+                    });
+                }
+
+                function showToast(message, type) {
+                    const toast = document.getElementById('toast');
+                    const toastMessage = document.getElementById('toast-message');
+                    toastMessage.textContent = message;
+                    toast.className = 'fixed bottom-4 right-4 px-4 py-2 rounded-lg shadow-lg transform transition-transform duration-300 text-white';
+                    if (type === 'success') {
+                        toast.classList.add('bg-green-500');
+                    } else {
+                        toast.classList.add('bg-red-500');
+                    }
+                    toast.style.display = 'block';
+                    setTimeout(() => {
+                        toast.classList.add('translate-y-0');
+                    }, 100);
+                    setTimeout(() => {
+                        toast.classList.remove('translate-y-0');
+                        toast.classList.add('translate-y-full');
+                        setTimeout(() => {
+                            toast.style.display = 'none';
+                        }, 300);
+                    }, 3000);
+                }
+            </script>
+            @endpush
 
 @endsection
